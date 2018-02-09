@@ -1,0 +1,100 @@
+1 - A
+
+2 - D
+
+3 - C
+
+4 - A
+
+5 - A
+
+6 - Certo
+
+7 - Certo
+
+8:
+public class NumeroABC {
+	private int a = 0;
+	private int b = 0;
+	private int c = 0;
+
+	private void trataNumeros() {
+		if (a < 0) {
+			a = Math.abs(a);
+		}
+
+		if (b < 0) {
+			b = Math.abs(b);
+		}
+	}
+
+	private void processaNumeros() {
+		char[] digitosNumeroA = String.valueOf(a).toCharArray();
+		char[] digitosNumeroB = String.valueOf(b).toCharArray();
+		String numeroC = "";
+
+		for (int counterA = 0; counterA < digitosNumeroA.length; counterA++) {
+			numeroC += digitosNumeroA[counterA];
+			for (int counterB = counterA; counterB < digitosNumeroB.length; counterB++) {
+				numeroC += digitosNumeroB[counterB];
+
+				if (digitosNumeroA.length > counterB + 1) {
+					break;
+				}
+			}
+		}
+
+		c = Integer.parseInt(numeroC);
+	}
+
+	public Integer imprimeNumeroC() {
+		trataNumeros();
+		processaNumeros();
+
+		if (c > 1000000) {
+			System.out.println("Número C é maior que 1.000.000");
+			return -1;
+		} else {
+			return c;
+		}
+
+	}
+
+	public int getA() {
+		return a;
+	}
+
+	public void setA(int a) {
+		this.a = a;
+	}
+
+	public int getB() {
+		return b;
+	}
+
+	public void setB(int b) {
+		this.b = b;
+	}
+
+	public int getC() {
+		return c;
+	}
+}
+
+9:
+public Integer calculaNoSubsequente(BinaryTree nodeRoot) {
+	int leftValue = 0;
+	int rightValue = 0;
+	int total = 0;
+	
+	if (nodeRoot == null) {
+		return 0;
+	} else {
+		leftValue = calculaNoSubsequente(nodeRoot.left);
+		rightValue = calculaNoSubsequente(nodeRoot.right);
+
+		total = nodeRoot.valor + leftValue + rightValue;
+		
+		return total;
+	}
+}
